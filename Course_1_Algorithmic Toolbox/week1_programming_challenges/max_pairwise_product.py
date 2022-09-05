@@ -1,10 +1,16 @@
-_ = int(input())
-a = list(map(int, input().split()))
-a.sort()
-print(max(a[-1]*a[-2] , a[0]*a[1]))
+def max_pairwise_product(a):
+    if a[0] > a[1]:
+        m1 , m2 = a[0] , a[1]
+    else :
+        m1 , m2 = a[1] , a[0]
+    for i in range(2,len(a)):
+        if a[i] >= m1 :
+            m1 , m2 = a[i] , m1
+        elif m1 > a[i] > m2 :
+            m2 = a[i]
+    return m1*m2
 
-def fib(n):
-    f = [0,1]
-    for i in range(2,n+1):
-        f.append(f[i-1]+f[i-2])
-    print(f[n])
+if __name__ == '__main__':
+    _ = int(input())
+    input_numbers = list(map(int, input().split()))
+    print(max_pairwise_product(input_numbers))
